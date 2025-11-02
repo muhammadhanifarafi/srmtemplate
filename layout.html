@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Components - Template Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        'primary-dark': '#2563EB',
+                        'primary-light': '#60A5FA',
+                    }
+                }
+            }
+        }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        code { background-color: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-size: 0.875em; }
+        pre { background-color: #1f2937; color: #f9fafb; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+        pre code { background-color: transparent; color: inherit; padding: 0; }
+    </style>
+</head>
+<body class="bg-gray-50" x-data="{ darkMode: false, sidebarOpen: false, dropdownOpen: false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode') || 'false')" :class="{'dark bg-gray-900': darkMode === true}">
+    
+    <div class="flex min-h-screen">
+        <aside class="hidden lg:block w-72 bg-white border-r border-gray-200 dark:bg-gray-900 dark:border-gray-800 p-4">
+            <nav class="space-y-1">
+                <a href="index.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Beranda</a>
+                <a href="dashboard.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Dashboard</a>
+                <a href="layout.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium bg-primary text-white">Layout</a>
+                <a href="buttons.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Buttons</a>
+                <a href="forms.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Forms</a>
+                <a href="icons.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Icons</a>
+                <a href="cards.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Cards</a>
+                <a href="tables.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Tables</a>
+                <a href="badges.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Badges</a>
+                <a href="dropdowns.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Dropdowns</a>
+                <a href="modals.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Modals</a>
+                <a href="alerts.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Alerts</a>
+                <a href="states.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Loading/Empty States</a>
+                <a href="pagination.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Pagination</a>
+                <a href="typography.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Typography</a>
+                <a href="colors.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Colors</a>
+            </nav>
+        </aside>
+        
+        <div class="flex-1">
+            <header class="bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-800 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Layout Components</h1>
+                    <button @click="darkMode = !darkMode" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                        <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+            
+            <main class="p-6">
+                <div class="max-w-7xl mx-auto space-y-8">
+                    <!-- Header/Navbar -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Header/Navbar</h2>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">
+                            Header biasanya berada di bagian atas dengan title page dan action buttons.
+                        </p>
+                        <div class="mb-6">
+                            <header class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-6 py-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-4">
+                                        <button class="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                            </svg>
+                                        </button>
+                                        <h2 class="text-xl font-bold text-gray-900 dark:text-white">Page Title</h2>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <button class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                                            </svg>
+                                        </button>
+                                        <div class="relative" x-data="{ open: false }" @click.outside="open = false">
+                                            <button @click="open = !open" class="flex items-center text-sm rounded-lg px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800">
+                                                <div class="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white">JD</div>
+                                                <span class="ml-2 text-gray-700 dark:text-gray-300">John Doe</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </header>
+                        </div>
+                        <pre><code>&lt;header class="bg-white border-b border-gray-200 px-6 py-4"&gt;
+    &lt;div class="flex items-center justify-between"&gt;
+        &lt;h2 class="text-xl font-bold"&gt;Page Title&lt;/h2&gt;
+        &lt;div class="flex items-center gap-2"&gt;
+            &lt;!-- Actions --&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/header&gt;</code></pre>
+                    </section>
+                    
+                    <!-- Sidebar Navigation -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Sidebar Navigation</h2>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">
+                            Sidebar untuk navigasi utama aplikasi dengan menu items dan submenu.
+                        </p>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                            <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+                                <aside class="w-full bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                                    <nav class="space-y-1">
+                                        <a href="#" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium bg-primary text-white">
+                                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                                            </svg>
+                                            Dashboard
+                                        </a>
+                                        <a href="#" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">
+                                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                                            </svg>
+                                            Stakeholders
+                                        </a>
+                                        <a href="#" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">
+                                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                            Meetings
+                                        </a>
+                                    </nav>
+                                </aside>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">With Submenu</h3>
+                                <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+                                    <aside class="w-full bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                                        <div x-data="{ open: false }" class="space-y-1">
+                                            <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">
+                                                <div class="flex items-center">
+                                                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                                    </svg>
+                                                    Menu with Children
+                                                </div>
+                                                <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                </svg>
+                                            </button>
+                                            <div x-show="open" class="ml-6 space-y-1">
+                                                <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 rounded-lg">Submenu 1</a>
+                                                <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 rounded-lg">Submenu 2</a>
+                                            </div>
+                                        </div>
+                                    </aside>
+                                </div>
+                            </div>
+                        </div>
+                        <pre><code>&lt;aside class="bg-white border-r border-gray-200 p-4"&gt;
+    &lt;nav class="space-y-1"&gt;
+        &lt;a href="#" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium bg-primary text-white"&gt;
+            &lt;svg class="w-5 h-5 mr-3"&gt;...&lt;/svg&gt;
+            Menu Item
+        &lt;/a&gt;
+    &lt;/nav&gt;
+&lt;/aside&gt;</code></pre>
+                    </section>
+                    
+                    <!-- Breadcrumb -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Breadcrumb</h2>
+                        <div class="mb-6 space-y-4">
+                            <nav class="flex" aria-label="Breadcrumb">
+                                <ol class="flex items-center space-x-2">
+                                    <li>
+                                        <a href="#" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Home</a>
+                                    </li>
+                                    <li>
+                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Section</a>
+                                    </li>
+                                    <li>
+                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <span class="text-gray-900 dark:text-white font-medium">Current Page</span>
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+                        <pre><code>&lt;nav class="flex" aria-label="Breadcrumb"&gt;
+    &lt;ol class="flex items-center space-x-2"&gt;
+        &lt;li&gt;&lt;a href="#" class="text-gray-500"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;svg class="w-4 h-4 text-gray-400"&gt;...&lt;/svg&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;span class="text-gray-900 font-medium"&gt;Current&lt;/span&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+                    </section>
+                    
+                    <!-- Grid Layouts -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Grid Layouts</h2>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">
+                            Contoh berbagai grid layout yang umum digunakan dalam dashboard.
+                        </p>
+                        <div class="mb-6 space-y-4">
+                            <div>
+                                <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">2 Columns</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-center text-sm text-gray-600 dark:text-gray-400">Column 1</div>
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-center text-sm text-gray-600 dark:text-gray-400">Column 2</div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">3 Columns</p>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-center text-sm text-gray-600 dark:text-gray-400">Column 1</div>
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-center text-sm text-gray-600 dark:text-gray-400">Column 2</div>
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-center text-sm text-gray-600 dark:text-gray-400">Column 3</div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">4 Columns</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-center text-sm text-gray-600 dark:text-gray-400">Column 1</div>
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-center text-sm text-gray-600 dark:text-gray-400">Column 2</div>
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-center text-sm text-gray-600 dark:text-gray-400">Column 3</div>
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-center text-sm text-gray-600 dark:text-gray-400">Column 4</div>
+                                </div>
+                            </div>
+                        </div>
+                        <pre><code>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-4"&gt;...&lt;/div&gt;
+&lt;div class="grid grid-cols-1 md:grid-cols-3 gap-4"&gt;...&lt;/div&gt;
+&lt;div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"&gt;...&lt;/div&gt;</code></pre>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
+

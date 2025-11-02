@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading & Empty States - Template Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        'primary-dark': '#2563EB',
+                        'primary-light': '#60A5FA',
+                    }
+                }
+            }
+        }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        code { background-color: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-size: 0.875em; }
+        pre { background-color: #1f2937; color: #f9fafb; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+        pre code { background-color: transparent; color: inherit; padding: 0; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .animate-spin { animation: spin 1s linear infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+        .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    </style>
+</head>
+<body class="bg-gray-50" x-data="{ darkMode: false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode') || 'false')" :class="{'dark bg-gray-900': darkMode === true}">
+    
+    <div class="flex min-h-screen">
+        <aside class="hidden lg:block w-72 bg-white border-r border-gray-200 dark:bg-gray-900 dark:border-gray-800 p-4">
+            <nav class="space-y-1">
+                <a href="index.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Beranda</a>
+                <a href="dashboard.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Dashboard</a>
+                <a href="layout.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Layout</a>
+                <a href="buttons.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Buttons</a>
+                <a href="forms.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Forms</a>
+                <a href="icons.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Icons</a>
+                <a href="cards.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Cards</a>
+                <a href="tables.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Tables</a>
+                <a href="badges.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Badges</a>
+                <a href="dropdowns.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Dropdowns</a>
+                <a href="modals.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Modals</a>
+                <a href="alerts.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Alerts</a>
+                <a href="states.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium bg-primary text-white">Loading/Empty States</a>
+                <a href="pagination.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Pagination</a>
+                <a href="typography.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Typography</a>
+                <a href="colors.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Colors</a>
+            </nav>
+        </aside>
+        
+        <div class="flex-1">
+            <header class="bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-800 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Loading & Empty States</h1>
+                    <button @click="darkMode = !darkMode" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                        <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+            
+            <main class="p-6">
+                <div class="max-w-7xl mx-auto space-y-8">
+                    <!-- Loading Spinner -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Loading Spinner</h2>
+                        <div class="flex flex-wrap gap-6 mb-6">
+                            <div class="flex flex-col items-center">
+                                <svg class="animate-spin h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Default</p>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <svg class="animate-spin h-12 w-12 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Large</p>
+                            </div>
+                        </div>
+                        <pre><code>&lt;svg class="animate-spin h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"&gt;
+    &lt;circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"&gt;&lt;/circle&gt;
+    &lt;path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"&gt;&lt;/path&gt;
+&lt;/svg&gt;</code></pre>
+                    </section>
+                    
+                    <!-- Skeleton Loading -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Skeleton Loading</h2>
+                        <div class="mb-6">
+                            <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+                                <div class="animate-pulse space-y-4">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="rounded-full bg-gray-300 dark:bg-gray-600 h-12 w-12"></div>
+                                        <div class="flex-1 space-y-2">
+                                            <div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-3/4"></div>
+                                            <div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-1/2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="h-4 bg-gray-300 dark:bg-gray-600 rounded"></div>
+                                    <div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-5/6"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <pre><code>&lt;div class="animate-pulse space-y-4"&gt;
+    &lt;div class="h-4 bg-gray-300 rounded w-3/4"&gt;&lt;/div&gt;
+    &lt;div class="h-4 bg-gray-300 rounded w-1/2"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </section>
+                    
+                    <!-- Empty State -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Empty State</h2>
+                        <div class="mb-6">
+                            <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-12 text-center">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                                </svg>
+                                <h3 class="mt-4 text-lg font-medium text-gray-900 dark:text-white">No items found</h3>
+                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Get started by creating a new item.</p>
+                                <div class="mt-6">
+                                    <button class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                        </svg>
+                                        Add Item
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <pre><code>&lt;div class="text-center p-12"&gt;
+    &lt;svg class="mx-auto h-12 w-12 text-gray-400"&gt;...&lt;/svg&gt;
+    &lt;h3 class="mt-4 text-lg font-medium"&gt;No items found&lt;/h3&gt;
+    &lt;p class="mt-2 text-sm text-gray-500"&gt;Description&lt;/p&gt;
+    &lt;button class="mt-6 px-4 py-2 bg-primary text-white rounded-md"&gt;
+        Add Item
+    &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
+
