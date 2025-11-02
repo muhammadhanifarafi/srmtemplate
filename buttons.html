@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buttons - Template Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        'primary-dark': '#2563EB',
+                        'primary-light': '#60A5FA',
+                    }
+                }
+            }
+        }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        code { background-color: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-size: 0.875em; }
+        pre { background-color: #1f2937; color: #f9fafb; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+        pre code { background-color: transparent; color: inherit; padding: 0; }
+    </style>
+</head>
+<body class="bg-gray-50" x-data="{ darkMode: false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode') || 'false')" :class="{'dark bg-gray-900': darkMode === true}">
+    
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="hidden lg:block w-72 bg-white border-r border-gray-200 dark:bg-gray-900 dark:border-gray-800 p-4">
+            <nav class="space-y-1">
+                <a href="index.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Beranda</a>
+                <a href="buttons.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium bg-primary text-white">Buttons</a>
+                <a href="forms.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Forms</a>
+                <a href="icons.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Icons</a>
+                <a href="cards.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Cards</a>
+                <a href="tables.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Tables</a>
+                <a href="modals.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Modals</a>
+                <a href="alerts.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Alerts</a>
+                <a href="typography.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Typography</a>
+                <a href="colors.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Colors</a>
+            </nav>
+        </aside>
+        
+        <div class="flex-1">
+            <header class="bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-800 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Buttons</h1>
+                    <button @click="darkMode = !darkMode" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                        <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+            
+            <main class="p-6">
+                <div class="max-w-7xl mx-auto space-y-8">
+                    <!-- Primary Buttons -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Primary Buttons</h2>
+                        <div class="flex flex-wrap gap-4 mb-6">
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors">Primary</button>
+                            <button class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-dark transition-colors font-semibold">Primary Medium</button>
+                            <button class="bg-primary text-white px-8 py-4 rounded-lg hover:bg-primary-dark transition-colors text-lg font-bold">Primary Large</button>
+                        </div>
+                        <pre><code>&lt;button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark"&gt;Primary&lt;/button&gt;</code></pre>
+                    </section>
+                    
+                    <!-- Secondary Buttons -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Secondary Buttons</h2>
+                        <div class="flex flex-wrap gap-4 mb-6">
+                            <button class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">Secondary</button>
+                            <button class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors font-semibold">Secondary Medium</button>
+                            <button class="bg-gray-700 text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg font-bold">Secondary Large</button>
+                        </div>
+                        <pre><code>&lt;button class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"&gt;Secondary&lt;/button&gt;</code></pre>
+                    </section>
+                    
+                    <!-- Color Variations -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Color Variations</h2>
+                        <div class="flex flex-wrap gap-4 mb-6">
+                            <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">Success</button>
+                            <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">Danger</button>
+                            <button class="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors">Warning</button>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">Info</button>
+                            <button class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">Purple</button>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">Indigo</button>
+                        </div>
+                        <pre><code>&lt;button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"&gt;Success&lt;/button&gt;</code></pre>
+                    </section>
+                    
+                    <!-- Outline Buttons -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Outline Buttons</h2>
+                        <div class="flex flex-wrap gap-4 mb-6">
+                            <button class="border-2 border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition-colors">Primary Outline</button>
+                            <button class="border-2 border-gray-500 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg hover:bg-gray-500 hover:text-white transition-colors">Secondary Outline</button>
+                            <button class="border-2 border-green-600 text-green-600 px-4 py-2 rounded-lg hover:bg-green-600 hover:text-white transition-colors">Success Outline</button>
+                            <button class="border-2 border-red-600 text-red-600 px-4 py-2 rounded-lg hover:bg-red-600 hover:text-white transition-colors">Danger Outline</button>
+                        </div>
+                        <pre><code>&lt;button class="border-2 border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white"&gt;Outline&lt;/button&gt;</code></pre>
+                    </section>
+                    
+                    <!-- Buttons with Icons -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Buttons with Icons</h2>
+                        <div class="flex flex-wrap gap-4 mb-6">
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                                Add New
+                            </button>
+                            <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Save
+                            </button>
+                            <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                                Delete
+                            </button>
+                            <button class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                                Refresh
+                            </button>
+                        </div>
+                        <pre><code>&lt;button class="bg-primary text-white px-4 py-2 rounded-lg flex items-center"&gt;
+    &lt;svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;
+        &lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"&gt;&lt;/path&gt;
+    &lt;/svg&gt;
+    Add New
+&lt;/button&gt;</code></pre>
+                    </section>
+                    
+                    <!-- Icon Only Buttons -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Icon Only Buttons</h2>
+                        <div class="flex flex-wrap gap-4 mb-6">
+                            <button class="bg-primary text-white p-2 rounded-lg hover:bg-primary-dark transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                            </button>
+                            <button class="bg-green-600 text-white p-2 rounded-lg hover:bg-green-700 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </button>
+                            <button class="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
+                            <button class="border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <pre><code>&lt;button class="bg-primary text-white p-2 rounded-lg hover:bg-primary-dark"&gt;
+    &lt;svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;
+        ...
+    &lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+                    </section>
+                    
+                    <!-- Disabled Buttons -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Disabled Buttons</h2>
+                        <div class="flex flex-wrap gap-4 mb-6">
+                            <button disabled class="bg-gray-300 text-gray-500 px-4 py-2 rounded-lg cursor-not-allowed">Disabled Primary</button>
+                            <button disabled class="bg-gray-200 text-gray-400 px-4 py-2 rounded-lg cursor-not-allowed">Disabled Secondary</button>
+                            <button disabled class="border-2 border-gray-300 text-gray-400 px-4 py-2 rounded-lg cursor-not-allowed">Disabled Outline</button>
+                        </div>
+                        <pre><code>&lt;button disabled class="bg-gray-300 text-gray-500 px-4 py-2 rounded-lg cursor-not-allowed"&gt;Disabled&lt;/button&gt;</code></pre>
+                    </section>
+                    
+                    <!-- Button Groups -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Button Groups</h2>
+                        <div class="flex gap-2 mb-6">
+                            <button class="bg-primary text-white px-4 py-2 rounded-l-lg hover:bg-primary-dark">First</button>
+                            <button class="bg-primary text-white px-4 py-2 hover:bg-primary-dark border-l border-primary-light">Middle</button>
+                            <button class="bg-primary text-white px-4 py-2 rounded-r-lg hover:bg-primary-dark border-l border-primary-light">Last</button>
+                        </div>
+                        <pre><code>&lt;div class="flex gap-2"&gt;
+    &lt;button class="bg-primary text-white px-4 py-2 rounded-l-lg"&gt;First&lt;/button&gt;
+    &lt;button class="bg-primary text-white px-4 py-2"&gt;Middle&lt;/button&gt;
+    &lt;button class="bg-primary text-white px-4 py-2 rounded-r-lg"&gt;Last&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
+

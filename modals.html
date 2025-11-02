@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modals - Template Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        'primary-dark': '#2563EB',
+                        'primary-light': '#60A5FA',
+                    }
+                }
+            }
+        }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        code { background-color: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-size: 0.875em; }
+        pre { background-color: #1f2937; color: #f9fafb; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+        pre code { background-color: transparent; color: inherit; padding: 0; }
+    </style>
+</head>
+<body class="bg-gray-50" x-data="{ darkMode: false, modalOpen: false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode') || 'false')" :class="{'dark bg-gray-900': darkMode === true}">
+    
+    <div class="flex min-h-screen">
+        <aside class="hidden lg:block w-72 bg-white border-r border-gray-200 dark:bg-gray-900 dark:border-gray-800 p-4">
+            <nav class="space-y-1">
+                <a href="index.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Beranda</a>
+                <a href="buttons.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Buttons</a>
+                <a href="forms.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Forms</a>
+                <a href="icons.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Icons</a>
+                <a href="cards.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Cards</a>
+                <a href="tables.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Tables</a>
+                <a href="modals.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium bg-primary text-white">Modals</a>
+                <a href="alerts.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Alerts</a>
+                <a href="typography.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Typography</a>
+                <a href="colors.html" class="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">Colors</a>
+            </nav>
+        </aside>
+        
+        <div class="flex-1">
+            <header class="bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-800 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Modals</h1>
+                    <button @click="darkMode = !darkMode" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                        <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+            
+            <main class="p-6">
+                <div class="max-w-7xl mx-auto space-y-8">
+                    <!-- Basic Modal (Alpine.js) -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Basic Modal (Alpine.js)</h2>
+                        <div class="mb-6">
+                            <button @click="modalOpen = true" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark">Open Modal</button>
+                            
+                            <!-- Modal -->
+                            <div x-show="modalOpen" x-cloak @click.away="modalOpen = false" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                                <div @click.stop class="bg-white dark:bg-gray-800 rounded-lg shadow-lg max-w-md w-full mx-4">
+                                    <div class="p-6">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Modal Title</h3>
+                                            <button @click="modalOpen = false" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <p class="text-gray-600 dark:text-gray-400 mb-4">This is a basic modal dialog. Click outside or the X button to close.</p>
+                                        <div class="flex justify-end gap-3">
+                                            <button @click="modalOpen = false" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-700">Cancel</button>
+                                            <button @click="modalOpen = false" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">Confirm</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <pre><code>&lt;div x-show="modalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"&gt;
+    &lt;div class="bg-white rounded-lg shadow-lg max-w-md w-full"&gt;
+        &lt;div class="p-6"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </section>
+                    
+                    <!-- SweetAlert2 Modals -->
+                    <section class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">SweetAlert2 Modals</h2>
+                        <div class="flex flex-wrap gap-4 mb-6">
+                            <button onclick="Swal.fire('Success!', 'Operation completed successfully', 'success')" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Success Alert</button>
+                            <button onclick="Swal.fire('Error!', 'Something went wrong', 'error')" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">Error Alert</button>
+                            <button onclick="Swal.fire('Warning!', 'Please check your input', 'warning')" class="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700">Warning Alert</button>
+                            <button onclick="Swal.fire('Info', 'This is an information message', 'info')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Info Alert</button>
+                            <button onclick="Swal.fire({title: 'Are you sure?', text: 'This action cannot be undone', icon: 'warning', showCancelButton: true, confirmButtonColor: '#d33', cancelButtonColor: '#3085d6', confirmButtonText: 'Yes, delete it!'})" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">Confirm Dialog</button>
+                        </div>
+                        <pre><code>// Success Alert
+Swal.fire('Success!', 'Operation completed', 'success');
+
+// Error Alert
+Swal.fire('Error!', 'Something went wrong', 'error');
+
+// Confirmation
+Swal.fire({
+    title: 'Are you sure?',
+    showCancelButton: true,
+    confirmButtonText: 'Yes'
+});</code></pre>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <style>[x-cloak] { display: none !important; }</style>
+</body>
+</html>
+
